@@ -10,10 +10,12 @@ import SwiftUI
 
 class AquaTrafficLightButton: NSButton {
   let viewModel = AquaTrafficLightViewModel(type: .red)
-  private var buttonView: AquaTrafficLightView?
+  
+  lazy var buttonView: AquaTrafficLightView = {
+    AquaTrafficLightView(viewModel: viewModel)
+  }()
   
   private func configure() {
-    self.buttonView = AquaTrafficLightView(viewModel: viewModel)
     title = ""
     isBordered = false
     setButtonType(.pushOnPushOff)
