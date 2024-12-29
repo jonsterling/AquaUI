@@ -8,7 +8,7 @@
 import Cocoa
 
 /// A subclass of `NSWindow` with Aqua-styled traffic light control buttons.
-public class AquaWindow : NSWindow {
+open class AquaWindow : NSWindow {
   private func trafficLightButtons() -> [AquaTrafficLightButton] {
     let types: [ButtonType] = [.closeButton, .miniaturizeButton, .zoomButton]
     return types.compactMap { b in

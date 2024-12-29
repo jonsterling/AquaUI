@@ -2,6 +2,8 @@
 
 AquaUI is a love letter to the Macintosh of the Aqua era—with its uncompromising attention to detail, futuristic design, and “lickable” visual style.
 
+<img src="/jonsterling/AquaUI/raw/main/Screenshots/Demo.mov" alt="Demo Video" style="max-width: 300px;">
+
 
 # What are our goals?
 
