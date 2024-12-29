@@ -21,7 +21,7 @@ We also aim for AquaUI applications to be good citizens within present-day macOS
 We take a broad view of current Macintosh platform user interface programming models. There are many things that are currently possible *only* using AppKit (such as window and scrollbar customisation), and on the other hand there are other things that are much easier using SwiftUI (such as
 compositional graphics).
 
-AquaUI would ideally provide tools to ugprade the visual appearance of both AppKit and SwiftUI-based controls. For the foreseeable future, there will be gaps in both, but we consider both paradigms to be within the remit of AquaUI.
+AquaUI would ideally provide tools to upgrade the visual appearance of both AppKit and SwiftUI-based controls. For the foreseeable future, there will be gaps in both, but we consider both paradigms to be within the remit of AquaUI.
 
 We also use SwiftUI at times as an implementation detail when constructing visuals for use within AppKit; for example, the Aqua scroller knob is currently backed by SwiftUI.
 
