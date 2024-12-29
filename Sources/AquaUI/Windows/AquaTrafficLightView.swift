@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct AquaTrafficLightView: View {
+  @Environment(\.self) var environment
   @ObservedObject var viewModel: AquaTrafficLightViewModel
   
   var body: some View {
+    let colorMixer = AquaColorMixer(environment: environment)
     let mainColor: Color =
     if viewModel.isActive {
       switch viewModel.type {
-      case .red: .init(red: 0.93, green: 0.42, blue: 0.37)
-      case .amber: .init(red: 0.96, green: 0.75, blue: 0.31)
-      case .green: .init(red: 0.39, green: 0.78, blue: 0.34)
+      case .red: colorMixer.redTrafficLightColor
+      case .amber: colorMixer.amberTrafficLightColor
+      case .green: colorMixer.greenTrafficLightColor
       }
     } else {
       .init(red: 0.7, green: 0.7, blue: 0.72)

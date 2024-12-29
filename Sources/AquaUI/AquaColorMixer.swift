@@ -44,4 +44,26 @@ public struct AquaColorMixer {
   public var lightColor: Color {
     baseColor.mix(with: .white, by: 0.8, in: .perceptual)
   }
+  
+  public var graphiteColor: Color {
+    .gray.mix(with: .blue, by: 0.2).mix(with: .white, by: 0.3)
+  }
+  
+  public var redTrafficLightColor: Color {
+    if resolvedAccentColor.isGrayscale { graphiteColor } else {
+      Color(red: 0.93, green: 0.42, blue: 0.37)
+    }
+  }
+  
+  public var amberTrafficLightColor: Color {
+    if resolvedAccentColor.isGrayscale { graphiteColor } else {
+      Color(red: 0.96, green: 0.75, blue: 0.31)
+    }
+  }
+  
+  public var greenTrafficLightColor: Color {
+    if resolvedAccentColor.isGrayscale { graphiteColor } else {
+      Color(red: 0.39, green: 0.78, blue: 0.34)
+    }
+  }
 }
