@@ -13,7 +13,6 @@ class AquaScroller : NSScroller {
   
   var slotHostingView: NSHostingView<AquaScrollerSlotView>?
   var knobHostingView: NSHostingView<AquaScrollerKnobView>?
-  var observation: NSKeyValueObservation?
   
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
