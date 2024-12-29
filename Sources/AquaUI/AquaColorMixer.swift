@@ -70,4 +70,34 @@ public struct AquaColorMixer {
   public var inactiveTrafficLightColor: Color {
     Color(red: 0.7, green: 0.7, blue: 0.72)
   }
+  
+  // Thanks to https://github.com/thompsonate/Lickable-Button/
+  public var buttonBackgroundGradient: Gradient {
+    Gradient(stops: [
+      .init(color: Color(.displayP3, red: 0.8, green: 0.8, blue: 0.8), location: 0),
+      .init(color: Color(.displayP3, red: 0.98, green: 0.98, blue: 0.98), location: 0.75),
+      .init(color: Color.white, location: 0.8),
+    ])
+  }
+  
+  public var pressedButtonBackgroundGradient: Gradient {
+    Gradient(stops: [
+      .init(color: Color(.displayP3, red: 0.33, green: 0.56, blue: 0.78), location: 0),
+      .init(color: Color(.displayP3, red: 0.44, green: 0.62, blue: 0.82), location: 0.5),
+      .init(color: Color(.displayP3, red: 0.75, green: 0.88, blue: 0.96), location: 1),
+    ])
+  }
+  
+  public var toolbarLozengeButtonBackgroundGradient: Gradient {
+    buttonBackgroundGradient
+  }
+  
+  public var pressedToolbarLozengeButtonBackgroundGradient: Gradient {
+    Gradient(stops: [
+      .init(color: Color(.displayP3, red: 0.7, green: 0.7, blue: 0.7), location: 0),
+      .init(color: Color(.displayP3, red: 0.88, green: 0.88, blue: 0.88), location: 0.75),
+      .init(color: Color(.displayP3, red: 0.9, green: 0.9, blue: 0.9), location: 8),
+    ])
+  }
+  
 }

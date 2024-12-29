@@ -9,6 +9,27 @@ import Cocoa
 
 /// A subclass of `NSWindow` with Aqua-styled traffic light control buttons.
 open class AquaWindow : NSWindow {
+  var toolbarObservation: NSKeyValueObservation?
+  let toolbarLozengeController = AquaToolbarLozengeViewController()
+  
+  public func installToolbarLozengeAccessory() {
+    addTitlebarAccessoryViewController(toolbarLozengeController)
+    
+    toolbarObservation = observe(\.toolbar?.isVisible, options: [.initial,.new]) { window, observedChange in
+      Task { @MainActor in
+        if let toolbarVisible = observedChange.newValue {
+          self.toolbarLozengeController.isHidden = false
+          if let toolbarVisible {
+            self.toolbarLozengeController.toolbarShown = toolbarVisible
+          }
+        } else {
+          self.toolbarLozengeController.isHidden = true
+        }
+      }
+    }
+  }
+  
+  
   private func trafficLightButtons() -> [AquaTrafficLightButton] {
     let types: [ButtonType] = [.closeButton, .miniaturizeButton, .zoomButton]
     return types.compactMap { b in
@@ -27,7 +48,7 @@ open class AquaWindow : NSWindow {
       button.viewModel.isHovered = false
     }
   }
-
+  
   public override static func standardWindowButton(_ b: NSWindow.ButtonType, for styleMask: NSWindow.StyleMask) -> NSButton? {
     guard let original = super.standardWindowButton(b, for: styleMask) else { return nil }
     let frame = original.frame
