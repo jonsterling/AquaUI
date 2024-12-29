@@ -1,5 +1,5 @@
 //
-//  NSScrollView+Aqua.swift
+//  NSScrollView+AquaUI.swift
 //  AquaUI
 //
 //  Created by Jonathan Sterling on 27/12/2024.
