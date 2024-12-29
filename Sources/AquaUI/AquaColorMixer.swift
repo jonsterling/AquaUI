@@ -12,10 +12,11 @@ extension Color.Resolved {
   }
 }
 
-public
-struct AquaColorMixer {
+/// `AquaColorMixer` provides colors to be used in Aqua control gradients, taking account of the ambient accent color. When the accent color is gray, it produces graphite-tinted colors.
+public struct AquaColorMixer {
   public let environment: EnvironmentValues
   
+  /// An environment is required in order to introspect on the accent color.
   public init(environment: EnvironmentValues) {
     self.environment = environment
   }

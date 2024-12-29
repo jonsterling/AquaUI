@@ -8,13 +8,10 @@
 import Cocoa
 
 public extension NSScrollView {
-  func aquify() {
-    verticalScroller = AquaScroller()
-  }
-  
+  /// Produce a scroll view with an Aqua-styled (vertical) scroller. **TODO**: style the horizontal scroller.
   static func aquaScrollView() -> NSScrollView {
     let scrollView = NSScrollView()
-    scrollView.aquify()
+    scrollView.verticalScroller = AquaScroller()
     return scrollView
   }
 }
