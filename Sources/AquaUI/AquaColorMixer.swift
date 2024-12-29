@@ -66,4 +66,8 @@ public struct AquaColorMixer {
       Color(red: 0.39, green: 0.78, blue: 0.34)
     }
   }
+  
+  public var inactiveTrafficLightColor: Color {
+    Color(red: 0.7, green: 0.7, blue: 0.72)
+  }
 }
