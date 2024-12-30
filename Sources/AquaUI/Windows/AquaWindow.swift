@@ -30,7 +30,7 @@ open class AquaWindow : NSWindow {
   }
   
   
-  private func trafficLightButtons() -> [AquaTrafficLightButton] {
+  private var trafficLightButtons: [AquaTrafficLightButton] {
     let types: [ButtonType] = [.closeButton, .miniaturizeButton, .zoomButton]
     return types.compactMap { b in
       standardWindowButton(b) as? AquaTrafficLightButton
@@ -38,13 +38,13 @@ open class AquaWindow : NSWindow {
   }
   
   @objc func hoverTrafficLights(_ sender: AquaTrafficLightButton) {
-    for button in trafficLightButtons() {
+    for button in trafficLightButtons {
       button.viewModel.isHovered = true
     }
   }
   
   @objc func unhoverTrafficLights(_ sender: AquaTrafficLightButton) {
-    for button in trafficLightButtons() {
+    for button in trafficLightButtons {
       button.viewModel.isHovered = false
     }
   }
