@@ -49,3 +49,10 @@ struct AquaToolbarLozengeBackgroundView: View {
     }.clipShape(Capsule())
   }
 }
+
+#Preview {
+  AquaToolbarLozengeBackgroundView(isPressed: false, isOn: false)
+    .frame(width: 20, height: 10)
+    .padding()
+
+}
