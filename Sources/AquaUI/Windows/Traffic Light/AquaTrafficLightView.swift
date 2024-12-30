@@ -83,9 +83,12 @@ struct AquaTrafficLightView: View {
 }
 
 #Preview {
+  let size = NSWindow.standardWindowButton(.closeButton, for: .closable)!.frame.size
+  let width = size.width
+  let height = size.height
   HStack {
-    AquaTrafficLightView(viewModel: .init(type: .red)).frame(width: 26, height: 26)
-    AquaTrafficLightView(viewModel: .init(type: .amber)).frame(width: 26, height: 26)
-    AquaTrafficLightView(viewModel: .init(type: .green)).frame(width: 26, height: 26)
-  }
+    AquaTrafficLightView(viewModel: .init(type: .red)).frame(width: width, height: height)
+    AquaTrafficLightView(viewModel: .init(type: .amber)).frame(width: width, height: height)
+    AquaTrafficLightView(viewModel: .init(type: .green)).frame(width: width, height: height)
+  }.padding()
 }
