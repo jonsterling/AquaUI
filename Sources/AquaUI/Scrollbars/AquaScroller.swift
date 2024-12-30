@@ -12,11 +12,11 @@ public class AquaScroller : NSScroller {
   @ObservedObject var viewModel = AquaScrollerViewModel()
   
   lazy var slotHostingView: NSHostingView<AquaScrollerSlotView> = {
-    NSHostingView(rootView: AquaScrollerSlotView())
+    FirstMouseHostingView(rootView: AquaScrollerSlotView())
   }()
   
   lazy var knobHostingView: NSHostingView<AquaScrollerKnobView> = {
-    NSHostingView(rootView: AquaScrollerKnobView(viewModel: viewModel))
+    FirstMouseHostingView(rootView: AquaScrollerKnobView(viewModel: viewModel))
   }()
   
   private func configureSubviews() {

@@ -20,7 +20,7 @@ class AquaTrafficLightButton: NSButton {
     isBordered = false
     setButtonType(.pushOnPushOff)
     
-    let hostingView = NSHostingView(rootView: self.buttonView)
+    let hostingView = FirstMouseHostingView(rootView: self.buttonView)
     hostingView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(hostingView)
     

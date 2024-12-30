@@ -28,7 +28,7 @@ public class AquaToolbarLozengeViewController: NSTitlebarAccessoryViewController
     
     view.isHidden = self.isHidden
     
-    let hostingView = NSHostingView(rootView: AquaToolbarLozengeView(viewModel: self.viewModel))
+    let hostingView = FirstMouseHostingView(rootView: AquaToolbarLozengeView(viewModel: self.viewModel))
     hostingView.translatesAutoresizingMaskIntoConstraints = false
     layoutAttribute = .right
     view.addSubview(hostingView)
