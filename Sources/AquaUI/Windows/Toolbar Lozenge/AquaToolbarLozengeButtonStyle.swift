@@ -15,18 +15,24 @@ public struct AquaToolbarLozengeButtonStyle: ButtonStyle {
   }
   
   public func makeBody(configuration: Configuration) -> some View {
-    let outlineGradient = Gradient(colors: [Color(red: 0.36, green: 0.36, blue: 0.36)])
     ZStack {
       AquaToolbarLozengeBackgroundView(isPressed: configuration.isPressed, isOn: isOn)
       Capsule()
-        .stroke(LinearGradient(
-          gradient: outlineGradient,
-          startPoint: .top,
-          endPoint: .bottom))
-        .opacity(0.8)
+        .stroke(
+          .linearGradient(stops: [
+            .init(color: .black.opacity(0.6), location: 0.0),
+            .init(color: .black.opacity(0.3), location: 0.7)
+          ], startPoint: .top, endPoint: .bottom),
+          lineWidth: 1.5
+        )
     }
     .clipShape(Capsule())
   }
 }
 
-
+#Preview {
+  Button("") {}
+    .buttonStyle(AquaToolbarLozengeButtonStyle(isOn: false))
+    .frame(width: 20, height: 10)
+    .padding()
+}

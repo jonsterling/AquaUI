@@ -21,6 +21,6 @@ public struct AquaToolbarLozengeView: View {
       NSApp.sendAction(#selector(NSWindow.toggleToolbarShown(_:)), to: nil, from: self)
     }
     .buttonStyle(buttonStyle)
-    .frame(width: 20, height: 8)
+    .frame(width: 22, height: 9)
   }
 }
