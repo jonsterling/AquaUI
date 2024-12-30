@@ -27,7 +27,9 @@ struct AquaScrollerKnobBackground: View {
     ])
     
     ZStack {
-      AquaScrollerWave(scrollOffset: $scrollOffset)
+      if isActive {
+        AquaScrollerWave(scrollOffset: $scrollOffset)
+      }
       
       Capsule()
         .fill(.linearGradient(backgroundGradient, startPoint: .leading, endPoint: .trailing))
