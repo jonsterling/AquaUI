@@ -11,6 +11,12 @@ import SwiftUI
 public class AquaToolbarLozengeViewController: NSTitlebarAccessoryViewController {
   @ObservedObject var viewModel: AquaToolbarLozengeViewModel = AquaToolbarLozengeViewModel()
   
+  public override var isHidden: Bool {
+    didSet {
+      view.isHidden = isHidden
+    }
+  }
+  
   public var toolbarShown: Bool = true {
     didSet {
       viewModel.isOn = !toolbarShown
@@ -20,9 +26,9 @@ public class AquaToolbarLozengeViewController: NSTitlebarAccessoryViewController
   public override func viewDidLoad() {
     super.viewDidLoad()
     
-    let button = AquaToolbarLozengeView(viewModel: self.viewModel)
+    view.isHidden = self.isHidden
     
-    let hostingView = NSHostingView(rootView: button)
+    let hostingView = NSHostingView(rootView: AquaToolbarLozengeView(viewModel: self.viewModel))
     hostingView.translatesAutoresizingMaskIntoConstraints = false
     layoutAttribute = .right
     view.addSubview(hostingView)
