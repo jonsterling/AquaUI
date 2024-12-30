@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftUI
 
-class AquaScroller : NSScroller {
+public class AquaScroller : NSScroller {
   @ObservedObject var viewModel = AquaScrollerViewModel()
   
   lazy var slotHostingView: NSHostingView<AquaScrollerSlotView> = {
@@ -34,20 +34,20 @@ class AquaScroller : NSScroller {
     configureSubviews()
   }
   
-  override func drawKnob() {
+  public override func drawKnob() {
     let rect = rect(for: .knob)
     viewModel.scrollOffset = rect.origin.y
     viewModel.isActive = if let window = window { window.isKeyWindow } else { false }
     knobHostingView.frame = rect
   }
   
-  override func drawKnobSlot(in slotRect: NSRect, highlight flag: Bool) {
+  public override func drawKnobSlot(in slotRect: NSRect, highlight flag: Bool) {
     var rect = slotRect
     rect.size.height += 1
     slotHostingView.frame = rect
   }
   
-  override func checkSpaceForParts() {
+  public override func checkSpaceForParts() {
     super.checkSpaceForParts()
     knobHostingView.isHidden = usableParts != .allScrollerParts
   }
