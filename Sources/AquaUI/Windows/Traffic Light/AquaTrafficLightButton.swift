@@ -54,7 +54,7 @@ class AquaTrafficLightButton: NSButton {
   func setDocumentEdited(_ edited: Bool) { }
   
   override func draw(_ dirtyRect: NSRect) {
-    viewModel.isActive = if let window = window { window.isKeyWindow } else { false }
+    viewModel.isActive = if let window { window.isKeyWindow } else { false }
     viewModel.isHighlighted = isHighlighted
   }
   
