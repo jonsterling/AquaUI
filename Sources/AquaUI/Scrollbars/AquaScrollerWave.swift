@@ -18,7 +18,6 @@ struct AquaScrollerWave: View {
       let shading = GraphicsContext.Shading.linearGradient(waveGradient, startPoint: startPoint, endPoint: endPoint, options: .repeat)
       context.fill(Path(CGRect(origin: .zero, size: size)), with: shading)
     }
-    .clipShape(Capsule())
   }
 }
 
