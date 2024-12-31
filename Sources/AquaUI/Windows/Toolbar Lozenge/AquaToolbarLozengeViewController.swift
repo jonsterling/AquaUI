@@ -11,12 +11,6 @@ import SwiftUI
 public class AquaToolbarLozengeViewController: NSTitlebarAccessoryViewController {
   @ObservedObject var viewModel: AquaToolbarLozengeViewModel = AquaToolbarLozengeViewModel()
   
-  public override var isHidden: Bool {
-    didSet {
-      view.isHidden = isHidden
-    }
-  }
-  
   public var toolbarShown: Bool = true {
     didSet {
       viewModel.isOn = !toolbarShown
@@ -25,8 +19,6 @@ public class AquaToolbarLozengeViewController: NSTitlebarAccessoryViewController
   
   public override func viewDidLoad() {
     super.viewDidLoad()
-    
-    view.isHidden = self.isHidden
     
     let hostingView = FirstMouseHostingView(rootView: AquaToolbarLozengeView(viewModel: self.viewModel))
     hostingView.translatesAutoresizingMaskIntoConstraints = false

@@ -13,20 +13,25 @@ open class AquaWindow : NSWindow {
   private let toolbarLozengeController = AquaToolbarLozengeViewController()
   
   /// When `true`, the toolbar toggle button will appear in the right-hand corner of the window. This property supersedes the old `NSWindow.showsToolbarButton` property to restore the pre-10.7 toolbar button.
-  public var showsAquaToolbarButton: Bool = false {
+  @objc public var showsAquaToolbarButton: Bool = false {
     didSet { updateToolbarLozengeVisibility() }
   }
   
+  @MainActor
   private func updateToolbarLozengeVisibility() {
     let shouldBeVisible = showsAquaToolbarButton && toolbar != nil
-    toolbarLozengeController.isHidden = !shouldBeVisible
+    let existingIndex = titlebarAccessoryViewControllers.firstIndex(of: toolbarLozengeController)
+    if shouldBeVisible && existingIndex == nil {
+      addTitlebarAccessoryViewController(toolbarLozengeController)
+    } else if let existingIndex {
+      removeTitlebarAccessoryViewController(at: existingIndex)
+    }
   }
   
   public override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
     super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
-    addTitlebarAccessoryViewController(toolbarLozengeController)
 
-    toolbarObservation = observe(\.toolbar?.isVisible, options: [.initial,.new]) { window, observedChange in
+    toolbarObservation = observe(\.toolbar?.isVisible, options: [.initial, .new]) { window, observedChange in
       Task { @MainActor in
         self.updateToolbarLozengeVisibility()
         if let toolbarVisible = observedChange.newValue, let toolbarVisible {
