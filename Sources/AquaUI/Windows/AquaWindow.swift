@@ -21,8 +21,10 @@ open class AquaWindow : NSWindow {
   private func updateToolbarLozengeVisibility() {
     let shouldBeVisible = showsAquaToolbarButton && toolbar != nil
     let existingIndex = titlebarAccessoryViewControllers.firstIndex(of: toolbarLozengeController)
-    if shouldBeVisible && existingIndex == nil {
-      addTitlebarAccessoryViewController(toolbarLozengeController)
+    if shouldBeVisible {
+      if existingIndex == nil {
+        addTitlebarAccessoryViewController(toolbarLozengeController)
+      }
     } else if let existingIndex {
       removeTitlebarAccessoryViewController(at: existingIndex)
     }
@@ -85,3 +87,4 @@ open class AquaWindow : NSWindow {
     }
   }
 }
+
