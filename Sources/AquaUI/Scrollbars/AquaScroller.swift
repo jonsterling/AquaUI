@@ -34,8 +34,22 @@ public class AquaScroller : NSScroller {
     configureSubviews()
   }
   
+  open var minimumKnobHeight: CGFloat { 40 }
+  
+  public override func rect(for partCode: NSScroller.Part) -> NSRect {
+    var rect = super.rect(for: partCode)
+    if partCode == .knob {
+      // TODO: this code does succeed to make the knob have a minimum height, but the tracking is kind of messed up. If the user grabs a knob that has been forced to a minimum size, it jumps.
+      let knobHeight = max(rect.height, minimumKnobHeight)
+      rect.size.height = knobHeight
+      rect.origin.y = (bounds.height - knobHeight) * CGFloat(floatValue)
+    }
+    return rect
+  }
+  
   public override func drawKnob() {
-    let rect = rect(for: .knob)
+    var rect = rect(for: .knob)
+
     viewModel.scrollOffset = rect.origin.y
     viewModel.isActive = if let window { window.isKeyWindow } else { false }
     knobHostingView.frame = rect
