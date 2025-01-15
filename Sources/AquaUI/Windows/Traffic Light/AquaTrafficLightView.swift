@@ -37,12 +37,11 @@ struct AquaTrafficLightView: View {
       ZStack(alignment: .center) {
         Circle()
           .fill(
-            .linearGradient(stops: [
-              .init(color: .init(red: 0.92, green: 0.83, blue: 0.82), location: 0.0),
-              .init(color: baseColor, location: 0.3),
-            ], startPoint: .top, endPoint: .bottom)
+            baseColor
             .shadow(.inner(color: .black, radius: 0.3))
           )
+        
+        Circle()
           .stroke(
             .linearGradient(stops: [
               .init(color: .black.opacity(0.6), location: 0.0),
@@ -50,7 +49,7 @@ struct AquaTrafficLightView: View {
             ], startPoint: .top, endPoint: .bottom),
             lineWidth: 1
           )
-        
+                
         if viewModel.isHovered {
           let width = reader.size.width / 2
           Image(systemName: systemSymbolName)
@@ -65,20 +64,39 @@ struct AquaTrafficLightView: View {
           Circle().fill(.black.opacity(0.2))
         }
         
+        
+        Ellipse()
+          .fill(
+            .linearGradient(stops: [.init(color: .white, location: 0), .init(color: .clear, location: 0.9)], startPoint: .top, endPoint: .bottom)
+          )
+          .frame(width: reader.size.width/2, height: reader.size.height/3)
+          .offset(y: -reader.size.height/5)
+          .opacity(0.8)
+
+        Circle()
+          .fill(
+            .ellipticalGradient(stops: [.init(color: .clear, location: 0), .init(color: .black, location: 0.2)], startRadiusFraction: 0.3, endRadiusFraction: 1)
+          )
+          .mask(
+            LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .bottom)
+          )
+          .mask(
+            LinearGradient(colors: [.black, .clear, .black], startPoint: .leading, endPoint: .trailing)
+          )
+          .opacity(0.5)
+        
         Circle()
           .fill(
             .radialGradient(
               colors: [.white, .clear],
-              center: .bottom,
-              startRadius: reader.size.width / 5,
+              center: .init(x: 0.5, y: 0.8),
+              startRadius: 0,
               endRadius: reader.size.width / 2)
           )
-          .opacity(0.3)
-          .clipShape(Circle())
+          .opacity(0.55)
       }
     }
     .padding(1)
-    .offset(y: 1)
   }
 }
 
@@ -90,5 +108,5 @@ struct AquaTrafficLightView: View {
     AquaTrafficLightView(viewModel: .init(type: .red)).frame(width: width, height: height)
     AquaTrafficLightView(viewModel: .init(type: .amber)).frame(width: width, height: height)
     AquaTrafficLightView(viewModel: .init(type: .green)).frame(width: width, height: height)
-  }.padding()
+  }.scaleEffect(CGSize(width: 2, height: 2)).padding(40)
 }
