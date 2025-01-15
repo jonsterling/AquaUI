@@ -20,7 +20,8 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
   public let webView = NonscrollingWebView()
   public let scrollView = NSScrollView.aquaScrollView()
   
-  static let sizeNotificationMessageName = "sizeNotification"
+  static let sizeNotificationMessageName = "aquaWebViewControllerSizeNotification"
+  static let debugNotificationMessageName = "aquaWebViewControllerDebugNotification"
   
   open override func loadView() {
     super.loadView()
@@ -49,6 +50,8 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
     }
     
     document.addEventListener('DOMContentLoaded', function () {
+      document.body.style.height = '100%'
+      document.body.style.overflow = 'hidden'
       initialiseObservers();
     });
     """
@@ -56,15 +59,22 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
     let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
     webView.configuration.userContentController.addUserScript(script)
     webView.configuration.userContentController.add(self, name: Self.sizeNotificationMessageName)
+    webView.configuration.userContentController.add(self, name: Self.debugNotificationMessageName)
   }
   
   open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    guard
-      message.name == Self.sizeNotificationMessageName,
-      let responseDict = message.body as? [String:Any],
-      let height = responseDict["height"] as? Float
-    else { return }
-    
-    webView.frame = NSRect(x: 0.0, y: 0.0, width: view.frame.width - 20, height: CGFloat(height))
+    switch message.name {
+    case Self.debugNotificationMessageName:
+      dump(message.body)
+      return
+    case Self.sizeNotificationMessageName:
+      guard
+        let responseDict = message.body as? [String:Any],
+        let height = responseDict["height"] as? Float
+      else { return }
+      webView.frame = NSRect(x: 0.0, y: 0.0, width: view.frame.width - 20, height: CGFloat(height))
+    default:
+      return
+    }
   }
 }
