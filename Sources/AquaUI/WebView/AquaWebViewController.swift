@@ -73,9 +73,16 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
         let responseDict = message.body as? [String:Any],
         let height = responseDict["height"] as? Float
       else { return }
-      webView.frame = NSRect(x: 0.0, y: 0.0, width: view.frame.width - 20, height: CGFloat(height))
+      let size = NSSize(width: scrollView.contentView.frame.width, height: CGFloat(height))
+      webView.frame = NSRect(origin: .zero, size: size)
     default:
       return
     }
   }
+}
+
+#Preview() {
+  let controller = AquaWebViewController()
+  let _ = controller.webView.load(URLRequest(url: URL(string: "https://www.jonmsterling.com/")!))
+  controller
 }
