@@ -49,25 +49,28 @@ struct AquaScrollerKnobBackground: View {
     }
     
     ZStack {
-      if isActive {
-        AquaScrollerWave(scrollOffset: $scrollOffset)
+      ZStack {
+        if isActive {
+          AquaScrollerWave(scrollOffset: $scrollOffset)
+        }
+        
+        Rectangle()
+          .fill(.linearGradient(backgroundGradient, startPoint: .leading, endPoint: .trailing))
+          .opacity(0.9)
+        
+        
+        RoundedRectangle(cornerRadius: 5)
+          .fill(.linearGradient(shineGradient, startPoint: .leading, endPoint: .trailing))
+          .offset(x: -6)
+          .frame(width: 7)
+          .padding(.vertical, 3)
+          .opacity(0.7)
+        
       }
-      
-      Rectangle()
-        .fill(.linearGradient(backgroundGradient, startPoint: .leading, endPoint: .trailing))
-        .opacity(0.9)
-      
-      RoundedRectangle(cornerRadius: 5)
-        .fill(.linearGradient(shineGradient, startPoint: .leading, endPoint: .trailing))
-        .offset(x: -6)
-        .frame(width: 7)
-        .padding(.vertical, 3)
-        .opacity(0.7)
-      
+      .saturation(saturation)
+      .brightness(brightness)
+      .grayscale(isActive ? 0 : 1.0)
     }
-    .saturation(saturation)
-    .brightness(brightness)
-    .grayscale(isActive ? 0 : 1.0)
   }
 }
 

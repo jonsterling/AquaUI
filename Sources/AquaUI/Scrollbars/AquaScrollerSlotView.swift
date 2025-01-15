@@ -27,7 +27,7 @@ struct AquaScrollerSlotView: View {
       rimPrimaryColor
     ])
     
-    let bedColor: Color = if colorScheme == .dark { .black.mix(with: .white, by: 0.35) } else { .white }
+    let bedColor: Color = if colorScheme == .dark { .black.mix(with: .white, by: 0.6) } else { .white }
     
     let innerShadowColor: Color = if colorScheme == .dark { .black.opacity(0.7) } else { .gray }
     
@@ -46,6 +46,7 @@ struct AquaScrollerSlotView: View {
           .fill(
             .shadow(.inner(color: innerShadowColor, radius: 3, y: 0))
           )
+          .stroke(.black.opacity(0.3))
           .foregroundStyle(bedColor)
       }
       .padding(.top, Self.topPadding)
@@ -56,4 +57,12 @@ struct AquaScrollerSlotView: View {
 
 #Preview {
   AquaScrollerSlotView().frame(width: 15, height: 100).padding()
+}
+
+
+
+#Preview() {
+  let controller = AquaWebViewController()
+  let _ = controller.webView.load(URLRequest(url: URL(string: "https://www.jonmsterling.com/")!))
+  controller
 }
