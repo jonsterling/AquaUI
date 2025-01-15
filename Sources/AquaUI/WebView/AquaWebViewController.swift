@@ -56,10 +56,11 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
     });
     """
     
+    let userContentController = webView.configuration.userContentController
     let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
-    webView.configuration.userContentController.addUserScript(script)
-    webView.configuration.userContentController.add(self, name: Self.sizeNotificationMessageName)
-    webView.configuration.userContentController.add(self, name: Self.debugNotificationMessageName)
+    userContentController.addUserScript(script)
+    userContentController.add(self, name: Self.sizeNotificationMessageName)
+    userContentController.add(self, name: Self.debugNotificationMessageName)
   }
   
   open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
