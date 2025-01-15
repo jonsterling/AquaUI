@@ -94,9 +94,8 @@ public struct AquaColorMixer {
   
   public var pressedToolbarLozengeButtonBackgroundGradient: Gradient {
     Gradient(stops: [
-      .init(color: Color(.displayP3, red: 0.7, green: 0.7, blue: 0.7), location: 0),
-      .init(color: Color(.displayP3, red: 0.88, green: 0.88, blue: 0.88), location: 0.75),
-      .init(color: Color(.displayP3, red: 0.9, green: 0.9, blue: 0.9), location: 8),
+      .init(color: mediumColor, location: 0),
+      .init(color: lightColor, location: 0.75),
     ])
   }
   
