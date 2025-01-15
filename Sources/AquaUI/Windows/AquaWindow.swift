@@ -17,6 +17,10 @@ open class AquaWindow : NSWindow {
     didSet { updateToolbarLozengeVisibility() }
   }
   
+  override open var toolbarStyle: NSWindow.ToolbarStyle {
+    didSet { toolbarLozengeController.windowToolbarStyle = toolbarStyle }
+  }
+  
   @MainActor
   private func updateToolbarLozengeVisibility() {
     let shouldBeVisible = showsAquaToolbarButton && toolbar != nil
