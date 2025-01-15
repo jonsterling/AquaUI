@@ -12,6 +12,8 @@ public extension NSScrollView {
   static func aquaScrollView() -> NSScrollView {
     let scrollView = NSScrollView()
     scrollView.verticalScroller = AquaScroller()
+    scrollView.hasVerticalScroller = true
+    scrollView.autohidesScrollers = true
     return scrollView
   }
 }
