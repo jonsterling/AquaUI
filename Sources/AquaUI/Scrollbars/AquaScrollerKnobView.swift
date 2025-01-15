@@ -16,17 +16,14 @@ struct AquaScrollerKnobView: View {
       .init(color: Color(.sRGB, red: 0.36, green: 0.36, blue: 0.36), location: 0.55)
     ])
     
-    
     AquaScrollerKnobBackground(scrollOffset: $viewModel.scrollOffset, isActive: $viewModel.isActive)
     .clipShape(Capsule())
     .overlay(Capsule().stroke(.black.opacity(0.3)))
     .shadow(color: .black.opacity(0.3), radius: 0.5, x: 0, y: 1)
     .padding(.top, AquaScrollerSlotView.topPadding - 1)
-    .padding(.bottom, AquaScrollerSlotView.bottomPadding-2)
-    .padding(.leading, 0.5)
-    .padding(.trailing, 0.5)
+    .padding(.bottom, AquaScrollerSlotView.bottomPadding - 2)
+    .padding([.trailing, .leading], 0.5)
   }
-  
 }
 
 #Preview {
