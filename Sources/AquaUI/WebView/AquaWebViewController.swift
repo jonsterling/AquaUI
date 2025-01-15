@@ -22,14 +22,14 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
   
   static let sizeNotificationMessageName = "sizeNotification"
   
-  override func loadView() {
+  open override func loadView() {
     super.loadView()
-    
+   
     view = scrollView
     view.autoresizesSubviews = true
   }
   
-  override func viewDidLoad() {
+  open override func viewDidLoad() {
     super.viewDidLoad()
     
     scrollView.documentView = webView
@@ -58,7 +58,7 @@ open class AquaWebViewController : NSViewController, WKScriptMessageHandler {
     webView.configuration.userContentController.add(self, name: Self.sizeNotificationMessageName)
   }
   
-  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+  open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     guard
       message.name == Self.sizeNotificationMessageName,
       let responseDict = message.body as? [String:Any],

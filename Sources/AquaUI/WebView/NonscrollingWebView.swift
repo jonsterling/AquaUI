@@ -8,8 +8,8 @@
 import Cocoa
 import WebKit
 
-class NonscrollingWebView : WKWebView {
-  override func scrollWheel(with theEvent: NSEvent) {
+open class NonscrollingWebView : WKWebView {
+  open override func scrollWheel(with theEvent: NSEvent) {
     nextResponder?.scrollWheel(with: theEvent)
     return
   }
