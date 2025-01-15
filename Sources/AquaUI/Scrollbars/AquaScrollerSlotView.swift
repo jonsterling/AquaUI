@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct AquaScrollerSlotView: View {
+  @Environment(\.colorScheme) var colorScheme
+  
   static let topPadding: CGFloat = 7.0
   static let bottomPadding: CGFloat = 10.0
-
+  
   var body: some View {
-    let rimPrimaryColor: Color = .white
-    let rimHighlightColor: Color = .init(.displayP3, red: 0.85, green: 0.85, blue: 0.85)
+    let rimPrimaryColor: Color =
+    if colorScheme == .dark { Color(.windowBackgroundColor) } else { .white}
+    let rimHighlightColor: Color =
+    if colorScheme == .dark { .black.mix(with: .white, by: 0.35) } else {
+      .init(.displayP3, red: 0.85, green: 0.85, blue: 0.85)
+    }
     
     let rimGradient = Gradient(colors: [
       rimPrimaryColor,
@@ -21,7 +27,9 @@ struct AquaScrollerSlotView: View {
       rimPrimaryColor
     ])
     
-    let bedColor: Color = .white
+    let bedColor: Color = if colorScheme == .dark { .black.mix(with: .white, by: 0.35) } else { .white }
+    
+    let innerShadowColor: Color = if colorScheme == .dark { .black.opacity(0.7) } else { .gray }
     
     ZStack {
       Rectangle()
@@ -36,7 +44,7 @@ struct AquaScrollerSlotView: View {
       ZStack {
         Capsule()
           .fill(
-            .shadow(.inner(color: .gray, radius: 3, y: 0))
+            .shadow(.inner(color: innerShadowColor, radius: 3, y: 0))
           )
           .foregroundStyle(bedColor)
       }

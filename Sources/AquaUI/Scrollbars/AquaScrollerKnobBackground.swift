@@ -26,12 +26,34 @@ struct AquaScrollerKnobBackground: View {
       colorMixer.lightColor
     ])
     
+    let brightness =
+    if isActive {
+      if environment.colorScheme == .dark {
+        -0.2
+      } else {
+        0.05
+      }
+    } else {
+      if environment.colorScheme == .dark {
+        0.05
+      } else {
+        0.15
+      }
+    }
+    
+    let saturation =
+    if environment.colorScheme == .dark {
+      0.8
+    } else {
+      0.9
+    }
+    
     ZStack {
       if isActive {
         AquaScrollerWave(scrollOffset: $scrollOffset)
       }
       
-      Capsule()
+      Rectangle()
         .fill(.linearGradient(backgroundGradient, startPoint: .leading, endPoint: .trailing))
         .opacity(0.9)
       
@@ -42,14 +64,10 @@ struct AquaScrollerKnobBackground: View {
         .padding(.vertical, 3)
         .opacity(0.7)
       
-      Capsule()
-        .stroke(.black, lineWidth: 2)
-        .opacity(0.5)
     }
-    .saturation(0.9)
-    .brightness(isActive ? 0.05 : 0.15)
+    .saturation(saturation)
+    .brightness(brightness)
     .grayscale(isActive ? 0 : 1.0)
-    .clipShape(Capsule())
   }
 }
 
