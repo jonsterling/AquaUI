@@ -16,9 +16,9 @@ We also aim for AquaUI applications to be good citizens within present-day macOS
 2. We aim to support both accent colors and light/dark mode.
 
 
-# Is AquaUI targetting AppKit or SwiftUI?
+# Is AquaUI targeting AppKit or SwiftUI?
 
-We take a broad view of current Macintosh platform user interface programming models. There are many things that are currently possible *only* using AppKit (such as window and scrollbar customisation), and on the other hand there are other things that are much easier using SwiftUI (such as compositional graphics).
+We take a broad view of current Macintosh platform user interface programming models. There are many things that are currently possible *only* using AppKit (such as window and scrollbar customisation), and on the other hand, there are other things that are much easier using SwiftUI (such as compositional graphics).
 
 AquaUI would ideally provide tools to upgrade the visual appearance of both AppKit and SwiftUI-based controls. For the foreseeable future, there will be gaps in both, but we consider both paradigms to be within the remit of AquaUI.
 
