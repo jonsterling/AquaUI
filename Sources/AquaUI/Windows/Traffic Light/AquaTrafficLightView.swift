@@ -32,47 +32,69 @@ struct AquaTrafficLightView: View {
     }
   }
   
+  var baseCircle: some View {
+    Circle()
+      .fill(
+        baseColor
+          .shadow(.inner(color: .black, radius: 0.3))
+      )
+  }
+  
+  var innerShadow: some View {
+    Circle()
+      .stroke(
+        .linearGradient(stops: [
+          .init(color: .black.opacity(0.8), location: 0.0),
+          .init(color: .black.opacity(0.2), location: 0.7)
+        ], startPoint: .top, endPoint: .bottom),
+        lineWidth: 1
+      )
+  }
+  
+  var glyph: some View {
+    Image(systemName: systemSymbolName)
+      .resizable()
+      .aspectRatio(contentMode: .fit)
+      .fontWeight(.black)
+      .foregroundStyle(.black.opacity(0.7))
+  }
+
+  
   var body: some View {
     GeometryReader { reader in
       ZStack(alignment: .center) {
-        Circle()
-          .fill(
-            baseColor
-            .shadow(.inner(color: .black, radius: 0.3))
-          )
+        baseCircle
+        innerShadow
         
-        Circle()
-          .stroke(
-            .linearGradient(stops: [
-              .init(color: .black.opacity(0.6), location: 0.0),
-              .init(color: .black.opacity(0.2), location: 0.7)
-            ], startPoint: .top, endPoint: .bottom),
-            lineWidth: 1
-          )
-                
         if viewModel.isHovered {
-          let width = reader.size.width / 2
-          Image(systemName: systemSymbolName)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: width, height: nil, alignment: .center)
-            .bold()
-            .foregroundStyle(.black.opacity(0.6))
+          glyph
+            .frame(
+              width: reader.size.width * 0.5,
+              height: nil,
+              alignment: .center)
         }
+        
         
         if viewModel.isHighlighted {
           Circle().fill(.black.opacity(0.2))
         }
         
         
-        Ellipse()
+        Circle()
           .fill(
-            .linearGradient(stops: [.init(color: .white, location: 0), .init(color: .clear, location: 0.9)], startPoint: .top, endPoint: .bottom)
+            .linearGradient(
+              stops: [
+                .init(color: .white, location: 0),
+                .init(color: .white, location: 0.6),
+                .init(color: .white.opacity(0.55),location: 0.8),
+                .init(color: .clear,location: 0.96)
+              ],
+              startPoint: .top, endPoint: .bottom)
           )
-          .frame(width: reader.size.width/2, height: reader.size.height/3)
-          .offset(y: -reader.size.height/5)
-          .opacity(0.8)
-
+          .offset(y: -reader.size.height/1.6)
+          .clipShape(Circle())
+          .padding(.all, 1.0)
+        
         Circle()
           .fill(
             .ellipticalGradient(stops: [.init(color: .clear, location: 0), .init(color: .black, location: 0.2)], startRadiusFraction: 0.3, endRadiusFraction: 1)
@@ -83,17 +105,17 @@ struct AquaTrafficLightView: View {
           .mask(
             LinearGradient(colors: [.black, .clear, .black], startPoint: .leading, endPoint: .trailing)
           )
-          .opacity(0.5)
+          .opacity(0.7)
         
         Circle()
           .fill(
             .radialGradient(
               colors: [.white, .clear],
               center: .init(x: 0.5, y: 0.8),
-              startRadius: 0,
+              startRadius: 2,
               endRadius: reader.size.width / 2)
           )
-          .opacity(0.55)
+          .opacity(0.4)
       }
     }
     .padding(1)
@@ -101,12 +123,11 @@ struct AquaTrafficLightView: View {
 }
 
 #Preview {
-  let size = NSWindow.standardWindowButton(.closeButton, for: .closable)!.frame.size
-  let width = size.width
-  let height = size.height
+  let width = 20.0
+  let height = 20.0
   HStack {
     AquaTrafficLightView(viewModel: .init(type: .red)).frame(width: width, height: height)
     AquaTrafficLightView(viewModel: .init(type: .amber)).frame(width: width, height: height)
     AquaTrafficLightView(viewModel: .init(type: .green)).frame(width: width, height: height)
-  }.scaleEffect(CGSize(width: 2, height: 2)).padding(40)
+  }.padding(40)
 }

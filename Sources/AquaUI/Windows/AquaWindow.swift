@@ -68,7 +68,9 @@ open class AquaWindow : NSWindow {
   
   public override static func standardWindowButton(_ b: NSWindow.ButtonType, for styleMask: NSWindow.StyleMask) -> NSButton? {
     guard let original = super.standardWindowButton(b, for: styleMask) else { return nil }
-    let frame = original.frame
+    var frame = original.frame
+    frame.size.width = 15
+    frame.size.height = 16
     
     switch b {
     case .closeButton:

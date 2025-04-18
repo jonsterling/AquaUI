@@ -51,19 +51,19 @@ public struct AquaColorMixer {
   
   public var redTrafficLightColor: Color {
     if resolvedAccentColor.isGrayscale { graphiteColor } else {
-      Color(red: 0.93, green: 0.42, blue: 0.37)
+      Color(red: 0.93, green: 0.35, blue: 0.35)
     }
   }
   
   public var amberTrafficLightColor: Color {
     if resolvedAccentColor.isGrayscale { graphiteColor } else {
-      Color(red: 0.96, green: 0.75, blue: 0.31)
+      Color(red: 0.96, green: 0.64, blue: 0)
     }
   }
   
   public var greenTrafficLightColor: Color {
     if resolvedAccentColor.isGrayscale { graphiteColor } else {
-      Color(red: 0.39, green: 0.78, blue: 0.34)
+      Color(red: 0.5, green: 0.8, blue: 0.0)
     }
   }
   
