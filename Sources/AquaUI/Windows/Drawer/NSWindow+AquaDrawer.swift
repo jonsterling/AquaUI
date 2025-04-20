@@ -54,9 +54,3 @@ open class AquaDrawer: NSWindow {
   }
 }
 
-extension NSWindow {
-  static public func aquaDrawer(contentViewController: NSViewController) -> AquaDrawer {
-    let drawer = AquaDrawer(contentViewController: contentViewController)
-    return drawer
-  }
-}
