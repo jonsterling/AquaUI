@@ -6,15 +6,30 @@
 //
 
 import Cocoa
+import SwiftUICore
 
 public class AquaUnifiedTitlebarBackgroundView: NSView {
+  open var gradientStartingColor: NSColor {
+    if NSApp.effectiveAppearance.colorScheme == .light {
+      NSColor(white: 236/255, alpha: 1.0)
+    } else {
+      NSColor(white: 70/255, alpha: 1.0)
+    }
+  }
+  
+  open var gradientEndingColor: NSColor {
+    if NSApp.effectiveAppearance.colorScheme == .light {
+      NSColor(white: 216/255, alpha: 1.0)
+    } else {
+      NSColor(white: 50/255, alpha: 1.0)
+    }
+  }
+  
+  open var gradient: NSGradient {
+    NSGradient(starting: gradientStartingColor, ending: gradientEndingColor)!
+  }
+  
   public override func draw(_ dirtyRect: NSRect) {
-    let gradientStartingColor = NSColor(displayP3Red: 236/255, green: 236/255, blue: 236/255, alpha: 1.0)
-    let gradientEndingColor = NSColor(displayP3Red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
-    let separatorColor = NSColor(displayP3Red: 175/255, green: 175/255, blue: 175/255, alpha: 1.0)
-    
-    let titlebarGradient = NSGradient(starting: gradientStartingColor, ending: gradientEndingColor)
-    
     let titlebarSeparatorPath = {
       let path = NSBezierPath()
       let y = bounds.minY + 1
@@ -23,9 +38,9 @@ public class AquaUnifiedTitlebarBackgroundView: NSView {
       return path
     }()
     
-    titlebarGradient?.draw(in: bounds, angle: 270.0)
+    gradient.draw(in: bounds, angle: 270.0)
     
-    separatorColor.set()
+    NSColor.separatorColor.set()
     titlebarSeparatorPath.stroke()
   }
   

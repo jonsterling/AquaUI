@@ -48,7 +48,7 @@ public class AquaScroller : NSScroller {
   }
   
   public override func drawKnob() {
-    var rect = rect(for: .knob)
+    let rect = rect(for: .knob)
 
     viewModel.scrollOffset = rect.origin.y
     viewModel.isActive = if let window { window.isKeyWindow } else { false }

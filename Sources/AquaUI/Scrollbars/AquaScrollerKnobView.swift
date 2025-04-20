@@ -10,12 +10,7 @@ import SwiftUI
 struct AquaScrollerKnobView: View {
   @ObservedObject var viewModel: AquaScrollerViewModel
 
-  var body: some View {
-    let outlineGradient = Gradient(stops: [
-      .init(color: Color(.sRGB, red: 0, green: 0.11, blue: 0.35), location: 0.45),
-      .init(color: Color(.sRGB, red: 0.36, green: 0.36, blue: 0.36), location: 0.55)
-    ])
-    
+  var body: some View {    
     AquaScrollerKnobBackground(scrollOffset: $viewModel.scrollOffset, isActive: $viewModel.isActive)
     .clipShape(Capsule())
     .overlay(Capsule().stroke(.black.opacity(0.3)))
