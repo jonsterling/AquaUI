@@ -17,7 +17,7 @@ extension NSWindow {
       drawerContentView.wantsLayer = true
       if let layer = drawerContentView.layer {
         layer.borderColor = CGColor(gray: 0.8, alpha: 1.0)
-        layer.backgroundColor = NSColor.white.cgColor
+        layer.backgroundColor = NSColor.windowBackgroundColor.cgColor
         layer.borderWidth = 4
         layer.cornerRadius = 5
       }
